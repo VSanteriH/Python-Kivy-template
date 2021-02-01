@@ -1,0 +1,2 @@
+def GetContent(image):
+    
