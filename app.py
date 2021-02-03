@@ -13,11 +13,10 @@ from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.graphics import Color, Rectangle
 from kivy.core.window import Window
-
-from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recyclegridlayout import RecycleGridLayout
 from kivy.uix.behaviors import FocusBehavior
-from kivy.uix.recycleview.layout import LayoutSelectionBehavior
+
+from kivy.uix.recycleview import RecycleView
 Window.clearcolor = (1, 1, 1, 1)
 
 #size and position for testing
@@ -25,18 +24,14 @@ Window.size = (360, 640)#Samsung s5 size
 Window.left = 1500
 import popup
 import changecolor
+import content
 import os
 import re
-class ChangeColor():
-    def GetAndChange(self):
-        changecolor.changeC()
-    pass
 
 #Classes that can be edited inside main.kv file.
 class P(FloatLayout):
     def ClosePopup(self):
-        popup.show_popup(True)
-        
+        popup.show_popup(True)     
     pass
 class MainWindow(Screen, Widget):
     def OpenPopup(self):
@@ -56,16 +51,14 @@ class DRWindow(Screen):
 class WindowManager(ScreenManager):
     pass
 
-#Kivys kv file that handles apps visuals.
-kv = Builder.load_file("main.kv")
-
 class MainApp(App):
     def build(self):   
-        return kv
+        pass
 
 if __name__ == "__main__":
     #changecolor.FindFiles()#Use this to change your projects black icons to white in icons folder.
     app = MainApp()
     app.run()
-    
+
+#kv = Builder.load_file("main.kv")#Needed for popup
     

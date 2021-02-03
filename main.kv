@@ -14,7 +14,35 @@ WindowManager: #Handless window views
         size_hint:0.8, 0.2
         pos_hint: {"x": 0.1, "top":0.1}
         on_release: root.ClosePopup()
-
+        
+<TextContent>:
+    Label:#outerlines
+        canvas.before: 
+            Color:
+                rgba: .2, .2, .5, .5
+            Line:
+                width: 2
+                rectangle: self.x -1, self.y, self.width + 4, self.height -2
+  
+    
+<Article>:
+    Label:
+        text: root.label_title.text
+        text_size: [100,250]
+        halign: 'left'
+        valign: 'top'
+        padding_x: 15
+        padding_y: 10
+        color: 0, .4, .4, 1
+    Label:
+        text: root.label_text.text
+        text_size: [100,200]
+        halign: 'left'
+        valign: 'top'
+        padding_x: 15
+        padding_y: 10
+        color: 0, .2, .4, 1
+    
 <MainWindow>: #Main windows view
     name: "main"
 
@@ -35,7 +63,7 @@ WindowManager: #Handless window views
            
             Image:
                 source: 'images/my_app.png'
-                padding : 10
+
             Image:
                 source: 'images/my_app.png'
             Button: 
@@ -58,13 +86,14 @@ WindowManager: #Handless window views
                 Rectangle:
                     size: self.size
                     pos: self.pos    
-            GridLayout:#Inner 
+            GridLayout:#######################################################################################################  
                 cols:1
-                rows:3 
+                TextContent:
+                     
                 Label:
                     canvas.before: 
                         Color:
-                            rgba: .5, .5, .5, .5
+                            rgba: .1, .1, .1, .5
                         Line:
                             width: 2
                             rectangle: self.x -1, self.y, self.width + 4, self.height -2
@@ -75,40 +104,25 @@ WindowManager: #Handless window views
                     valign: 'top'
                     padding_x: 15
                     padding_y: 10
-                    color: 1, 1, 1, 1
-            Label:
-                canvas.before: 
-                    Color:
-                        rgba: .1, .1, .1, .5
-                    Line:
-                        width: 2
-                        rectangle: self.x -1, self.y, self.width + 4, self.height -2
-                text: "Lorem"
-                
-                text_size: self.size
-                halign: 'left'
-                valign: 'top'
-                padding_x: 15
-                padding_y: 10
-                color: 0, 0, 1, 1
-            Label:
-                canvas.before: 
+                    color: 0, 0, 1, 1
+                Label:
+                    canvas.before: 
+                        
+                        Color:
+                            rgba: .1, .1, .1, .5
+                        Line:
+                            width: 2
+                            rectangle: self.x -1, self.y, self.width + 4, self.height -2
+                    text: "Lorem"
                     
-                    Color:
-                        rgba: .1, .1, .1, .5
-                    Line:
-                        width: 2
-                        rectangle: self.x -1, self.y, self.width + 4, self.height -2
-                text: "Lorem"
-                
-                text_size: self.size
-                halign: 'left'
-                valign: 'top'
-                padding_x: 15
-                padding_y: 10
-                color: 0, 0, 1, 1
-                          
-           
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'top'
+                    padding_x: 15
+                    padding_y: 10
+                    color: 0, 0, 1, 1
+                            
+            
      
         GridLayout: #Down bar
             cols:3
