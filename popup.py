@@ -1,5 +1,6 @@
 #PopUp
 from kivy.uix.popup import Popup
+from kivy.uix.textinput import TextInput
 import app
 PUopen = False
 show = app.P()#This "P" contains FloatLayout that is in main.kv file.

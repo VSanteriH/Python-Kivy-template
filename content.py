@@ -15,8 +15,8 @@ def loadarticles(lenght ,articlesList):
         text = str(file['text'])
         
         article = {
-        "title": title,
-        "text": text,
+            "title": title,
+            "text": text,
         } 
         oldList.append(article)
     

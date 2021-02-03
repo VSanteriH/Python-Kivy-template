@@ -17,7 +17,7 @@ from kivy.uix.recyclegridlayout import RecycleGridLayout
 from kivy.uix.behaviors import FocusBehavior
 
 from kivy.uix.recycleview import RecycleView
-Window.clearcolor = (1, 1, 1, 1)
+Window.clearcolor = (.94, 1, 1, 1)
 
 #size and position for testing
 Window.size = (360, 640)#Samsung s5 size
@@ -31,7 +31,8 @@ import re
 #Classes that can be edited inside main.kv file.
 class P(FloatLayout):
     def ClosePopup(self):
-        popup.show_popup(True)     
+        popup.show_popup(True)  
+           
     pass
 class MainWindow(Screen, Widget):
     def OpenPopup(self):
@@ -60,5 +61,5 @@ if __name__ == "__main__":
     app = MainApp()
     app.run()
 
-#kv = Builder.load_file("main.kv")#Needed for popup
+kv = Builder.load_file("main.kv")#Needed for popup
     
