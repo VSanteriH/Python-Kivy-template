@@ -61,5 +61,5 @@ if __name__ == "__main__":
     app = MainApp()
     app.run()
 
-kv = Builder.load_file("main.kv")#Needed for popup
+#kv = Builder.load_file("main.kv")#Needed for popup
     

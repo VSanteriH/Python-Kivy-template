@@ -1,10 +1,11 @@
 from kivy.storage.jsonstore import JsonStore
 from kivy.properties import StringProperty, ListProperty
 from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
 from kivy.uix.scrollview import ScrollView
-from kivy.uix.widget import Widget
+#from kivy.uix.widget import Widget
 def loadarticles(lenght ,articlesList):
     data1 = JsonStore('content.json')
     data = data1.get('rows')
@@ -22,11 +23,11 @@ def loadarticles(lenght ,articlesList):
     
     return oldList
     
-class Article(Label):
+class Article(BoxLayout):
     label_title = Label()
     label_text = Label()
 
-class TextContent(Screen):
+class TextContent(BoxLayout):
     articlesList = []
     length = len(articlesList)
     articles = loadarticles(length, articlesList)
@@ -34,11 +35,14 @@ class TextContent(Screen):
     print(articlesList)
     def __init__(self, **kwargs):
         super(TextContent, self).__init__(**kwargs)
+        self.orientation = "vertical"
+
         for file in self.articlesList:
             lbl = Article() 
             lbl.label_title.text = file['title']
             lbl.label_text.text = file['text']
-            print(lbl.label_title.text)
+            
             self.add_widget(lbl)
+           # print(help(self))
             
             

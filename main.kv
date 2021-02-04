@@ -19,8 +19,8 @@ WindowManager: #Handless window views
         pos_hint: {"x": 0.1, "top":0.1}
         on_release: root.ClosePopup()
         
-<TextContent>:
-    Label:#outerlines
+<TextContent>: 
+    BoxLayout:#outerlines
         canvas.before: 
             Color:
                 rgba: .7, .9, .8, .9
@@ -29,23 +29,24 @@ WindowManager: #Handless window views
                 rectangle: self.x -1, self.y, self.width + 2, self.height -2
   
 <Article>:
-
-    Label:#title
-        text: root.label_title.text
-        #text_size: [100,250]
-        halign: 'left'
-        valign: 'top'
-        padding_x: 0
-        padding_y: 0
-        color: 0, .1, .2, 1
-    Label:#text
-        text: root.label_text.text
-        #text_size: [300,200]
-        #halign: 'center'
-        #valign: 'top'
-        #padding_x: 15
-        #padding_y: 10
-        color: 0, .1, .2, 1
+    BoxLayout:#outerlines
+        orientation: 'vertical'
+        Label:#title
+            text: root.label_title.text
+            #text_size: [100,250]
+            halign: 'left'
+            valign: 'top'
+            padding_x: 0
+            padding_y: 0
+            color: 0, .1, .2, 1
+        Label:#text
+            text: root.label_text.text
+            #text_size: [300,200]
+            #halign: 'center'
+            #valign: 'top'
+            #padding_x: 15
+            #padding_y: 10
+            color: 0, .1, .2, 1
         
 <MainWindow>: #Main windows view
     name: "main"
@@ -81,23 +82,9 @@ WindowManager: #Handless window views
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white
                   
-        GridLayout:#Mid 
-            cols:1 
-             
-            canvas.before:
-                Color:
-                    rgba: .94, 1, 1, 1 
-                Rectangle:
-                    size: self.size
-                    pos: self.pos    
-            GridLayout:#######################################################################################################  
-                cols:1
-                TextContent:
-                TextContent:
-                TextContent:
-                     
-               
-     
+        BoxLayout:#Mid 
+            TextContent:
+
         GridLayout: #Down bar
             cols:3
             rows:1
