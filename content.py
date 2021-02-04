@@ -33,6 +33,7 @@ class TextContent(BoxLayout):
     articles = loadarticles(length, articlesList)
     articlesList = articles
     print(articlesList)
+    
     def __init__(self, **kwargs):
         super(TextContent, self).__init__(**kwargs)
         self.orientation = "vertical"
@@ -41,7 +42,7 @@ class TextContent(BoxLayout):
             lbl = Article() 
             lbl.label_title.text = file['title']
             lbl.label_text.text = file['text']
-            
+            print(lbl.label_title.text)
             self.add_widget(lbl)
            # print(help(self))
             

@@ -20,32 +20,35 @@ WindowManager: #Handless window views
         on_release: root.ClosePopup()
         
 <TextContent>: 
+  
+<Article>:
     BoxLayout:#outerlines
+
         canvas.before: 
             Color:
                 rgba: .7, .9, .8, .9
             Line:
                 width: 2
                 rectangle: self.x -1, self.y, self.width + 2, self.height -2
-  
-<Article>:
-    BoxLayout:#outerlines
         orientation: 'vertical'
         Label:#title
             text: root.label_title.text
-            #text_size: [100,250]
+            size: self.texture_size
+            text_size: root.width, root.height/4
             halign: 'left'
             valign: 'top'
-            padding_x: 0
-            padding_y: 0
+            padding_x: 5
+            padding_y: -2
             color: 0, .1, .2, 1
         Label:#text
             text: root.label_text.text
-            #text_size: [300,200]
-            #halign: 'center'
-            #valign: 'top'
-            #padding_x: 15
-            #padding_y: 10
+            size: self.texture_size
+
+            text_size: root.width, root.height
+            halign: 'left'
+            valign: 'top'
+            padding_x: 5
+            padding_y: 0
             color: 0, .1, .2, 1
         
 <MainWindow>: #Main windows view

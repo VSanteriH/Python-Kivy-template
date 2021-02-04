@@ -1,7 +1,8 @@
 #Changes black pixels to white
-#This is usefull if we have black icons and want them to be white so icon color manupalation would be possible.
+#This is usefull if we have black icons and want them to be white so icon color manupalation would be possible inside kv file.
 import os
 from PIL import Image #https://pillow.readthedocs.io/en/stable/
+
 #Finds all png images in icons folder and chages those images black pixels to white
 def FindFiles():
     directory = os.fsencode( "icons/")
