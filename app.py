@@ -18,7 +18,7 @@ from kivy.uix.behaviors import FocusBehavior
 
 from kivy.uix.recycleview import RecycleView
 Window.clearcolor = (.94, 1, 1, 1)
-
+from kivy.app import runTouchApp
 #size and position for testing
 Window.size = (360, 640)#Samsung s5 size
 Window.left = 1500
@@ -58,8 +58,11 @@ class MainApp(App):
 
 if __name__ == "__main__":
     #changecolor.FindFiles()#Use this to change your projects black icons to white in icons folder.
+    
     app = MainApp()
     app.run()
+     
+    
 
 #Builder.load_file("main.kv")#Needed for popup
     

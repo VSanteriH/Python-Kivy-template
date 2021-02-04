@@ -4,6 +4,7 @@ WindowManager: #Handless window views
     DLWindow:
     DMWindow:
     DRWindow:
+    
 <P>: #Popup window
     Label:
         text: "Add new Item"
@@ -18,11 +19,13 @@ WindowManager: #Handless window views
         size_hint:0.8, 0.2
         pos_hint: {"x": 0.1, "top":0.1}
         on_release: root.ClosePopup()
-        
+
+
 <TextContent>: 
-  
+    
 <Article>:
     BoxLayout:#outerlines
+        size:(root.width,2050)
 
         canvas.before: 
             Color:
@@ -33,22 +36,24 @@ WindowManager: #Handless window views
         orientation: 'vertical'
         Label:#title
             text: root.label_title
-            size: self.texture_size
-            text_size: root.width, root.height/4
+            text_size: root.width, root.height/2
             halign: 'left'
             valign: 'top'
             padding_x: 5
-            padding_y: -2
+            padding_y: 2
             color: 0, .1, .2, 1
+            font_size : 20
+
         Label:#text
             text: root.label_text
-            size: self.texture_size
+            size: self.width , self.height
 
-            text_size: root.width, root.height
+            text_size: root.width, root.height / 1.7
             halign: 'left'
             valign: 'top'
             padding_x: 5
             padding_y: 0
+            
             color: 0, .1, .2, 1
         
 <MainWindow>: #Main windows view
@@ -70,10 +75,13 @@ WindowManager: #Handless window views
             spacing: 70, 0
            
             Image:
-                source: 'images/my_app.png'
-
+                source: 'icons/aperture-4x.png'
+                color: [1,1,1,0]
+                size_hint:.95, 0.1
             Image:
                 source: 'icons/aperture-4x.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
             Button: 
                 background_color:(0, 0, 0, 0)#transperent
                 on_release: 
@@ -86,7 +94,18 @@ WindowManager: #Handless window views
                     color: [1,1,1,1] #white
                   
         BoxLayout:#Mid 
-            TextContent:
+            ScrollView:
+                size_hint: 1.0, 1
+                height:root.height - 200
+                pos_hint: {'center_y':0.5}
+                bar_width: 2
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: root.height + 1000 #Determs Articles size
+                    TextContent:
+                 
 
         GridLayout: #Down bar
             cols:3

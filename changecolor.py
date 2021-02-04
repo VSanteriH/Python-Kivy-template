@@ -25,6 +25,3 @@ def ChangeColor(image):
                 #newimage.putpixel((x,y), (0,0,0,a)) 
                 
     newimage.save(image)#saves a file over the old one.
-
-            
-
