@@ -54,7 +54,7 @@ class WindowManager(ScreenManager):
 
 class MainApp(App):
     def build(self):   
-        pass
+        return MainWindow()
 
 if __name__ == "__main__":
     #changecolor.FindFiles()#Use this to change your projects black icons to white in icons folder.

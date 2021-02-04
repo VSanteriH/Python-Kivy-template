@@ -32,7 +32,7 @@ WindowManager: #Handless window views
                 rectangle: self.x -1, self.y, self.width + 2, self.height -2
         orientation: 'vertical'
         Label:#title
-            text: root.label_title.text
+            text: root.label_title
             size: self.texture_size
             text_size: root.width, root.height/4
             halign: 'left'
@@ -41,7 +41,7 @@ WindowManager: #Handless window views
             padding_y: -2
             color: 0, .1, .2, 1
         Label:#text
-            text: root.label_text.text
+            text: root.label_text
             size: self.texture_size
 
             text_size: root.width, root.height

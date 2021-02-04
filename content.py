@@ -11,7 +11,7 @@ def loadarticles(lenght ,articlesList):
     data = data1.get('rows')
     oldList = articlesList
  
-    for file in data[lenght: lenght+3]:
+    for file in data[lenght: lenght+4]:
         title = str(file['title'])
         text = str(file['text'])
         
@@ -24,8 +24,8 @@ def loadarticles(lenght ,articlesList):
     return oldList
     
 class Article(BoxLayout):
-    label_title = Label()
-    label_text = Label()
+    label_title = StringProperty()
+    label_text = StringProperty()
 
 class TextContent(BoxLayout):
     articlesList = []
@@ -40,10 +40,11 @@ class TextContent(BoxLayout):
 
         for file in self.articlesList:
             lbl = Article() 
-            lbl.label_title.text = file['title']
-            lbl.label_text.text = file['text']
-            print(lbl.label_title.text)
+            lbl.label_title = file['title']
+            lbl.label_text = file['text']
+            
             self.add_widget(lbl)
+            print(self)
            # print(help(self))
             
             
