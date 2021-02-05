@@ -1,13 +1,8 @@
-from kivy.storage.jsonstore import JsonStore
-from kivy.properties import StringProperty, ListProperty
-from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import StringProperty
-from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
-from kivy.app import runTouchApp
+from kivy.properties import StringProperty, ListProperty
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.storage.jsonstore import JsonStore
 import app
 #from kivy.uix.widget import Widget
 def loadarticles(lenght ,articlesList):
@@ -27,20 +22,30 @@ def loadarticles(lenght ,articlesList):
     
     return oldList
 
-class ScrollElement(GridLayout):
-    pass
+
 
 class Article(BoxLayout):
     label_title = StringProperty()
     label_text = StringProperty()
     le = 0
+    sizeY = 140 #Sets height of article
 
+#Gets X ammount of Article classes and make 1 element of those
 class TextContent(BoxLayout):
     articlesList = []
-    length = len(articlesList)
-    articles = loadarticles(length, articlesList)
+    startpos = len(articlesList)
+    articles = loadarticles(startpos, articlesList)
     articlesList = articles 
-    def __init__(self, **kwargs):
+    def Update(pp, **kwargs):
+        super(TextContent, self).__init__(**kwargs)
+        TextContent.articlesList = []
+        TextContent.startpos = 10
+        TextContent.articles = loadarticles(TextContent.startpos, TextContent.articlesList)
+        print(TextContent.articles)
+        TextContent.articlesList = TextContent.articles 
+        TextContent.doList(TextContent, **kwargs)
+
+    def doList(self, **kwargs):
         super(TextContent, self).__init__(**kwargs)
         self.orientation = "vertical"
         for file in self.articlesList:
@@ -50,5 +55,10 @@ class TextContent(BoxLayout):
             lbl.label_text = file['text']
 
             self.add_widget(lbl)
+            
         self.len = len(self.articlesList)
         app.MainWindow.SiteLenght(self,self.len)
+    def __init__(self, **kwargs):
+        self.doList()
+        
+    

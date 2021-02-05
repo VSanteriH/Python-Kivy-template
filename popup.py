@@ -2,9 +2,8 @@
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 import app
-PUopen = False
-show = app.P()#This "P" contains FloatLayout that is in main.kv file.
-popupWindow = Popup(title="Add new", content=show, size_hint=(None,None), size=(300,400))
+show = app.P()#This "P" contains FloatLayout that is in main.kv file P classes subclass.
+popupWindow = Popup(title="Add something", content=show, size_hint=(None,None), size=(300,400))
 
 #To open PopUp calls "OpenPopup" function inside "MainWindow" Class.
 #Closes this popup by calling "ClosePopp insede "P" Class.

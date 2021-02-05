@@ -1,4 +1,4 @@
-WindowManager: #Handless window views
+WindowManager: #Handless window views. Add "Screen" subclass to classes you want to use this.
     MainWindow:
     SecondWindow:
     DLWindow:
@@ -10,7 +10,7 @@ WindowManager: #Handless window views
         text: "Add new Item"
         size_hint:0.6, 0.2
         pos_hint: {"x": 0.2, "top":1}
-    TextInput
+    TextInput:
         text: 'Type something...'
         size_hint:1, .3
         pos_hint: {"x": 0, "top":0.8}
@@ -20,18 +20,17 @@ WindowManager: #Handless window views
         pos_hint: {"x": 0.1, "top":0.1}
         on_release: root.ClosePopup()
 
-
-<TextContent>: 
+<TextContent>: #Content is made inside content.py 
     
-
-<Article>:
-    size : root.width,140 # Sets one article box size
+#Single article element with 2 text labels
+<Article>: 
+    size : root.width, root.sizeY # Sets one article box size
     size_hint :1, None
     BoxLayout:#outerlines
         orientation: 'vertical'
         canvas.before: 
             Color:
-                rgba: .7, .9, .8, .9
+                rgba: .7, .9, .8, .4
             Line:
                 width: 2
                 rectangle: self.x -1, self.y, self.width + 2, self.height -2
@@ -57,7 +56,7 @@ WindowManager: #Handless window views
             
             color: 0, .1, .2, 1
         
-<MainWindow>: #Main windows view
+<MainWindow>: #Main content
     name: "main"
 
     GridLayout:
@@ -68,22 +67,22 @@ WindowManager: #Handless window views
             rows:1
             canvas.before:
                 Color:
-                    rgba: .5, 1, .5, 1 
+                    rgba: .5, 1, .5, .9
                 Rectangle:
                     size: self.size
                     pos: self.pos
             size_hint:1, 0.1
             spacing: 70, 0
            
-            Image:
+            Image: #Hidden
                 source: 'icons/aperture-4x.png'
                 color: [1,1,1,0]
                 size_hint:.95, 0.1
-            Image:
+            Image: #Logo ect
                 source: 'icons/aperture-4x.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-            Button: 
+            Button: #Hamburger that takes to right side menu
                 background_color:(0, 0, 0, 0)#transperent
                 on_release: 
                     app.root.current= "second"
@@ -105,23 +104,23 @@ WindowManager: #Handless window views
                 GridLayout:
                     cols: 1
                     size_hint_y: None
-                    height: 140 * root.articleammount
+                    height: root.articleheight * root.articleammount # values from app.py MainWindow class.
                     TextContent:
                  
 
-        GridLayout: #Down bar #############################
+        GridLayout: 
             cols:3
             rows:1
             size_hint:0.02, 0.08
             spacing: 50, 0
-            canvas.before:
+            canvas.before: 
                 Color:
                     rgba: 0, 0, 0, 1 
                 Rectangle:
                     size: self.size
                     pos: self.pos
-            Button: 
-                background_color:(1, 1, 1, 0)
+            Button: #Left down menu 
+                background_color:(1, 1, 1, 0)#Transperent
                 size_hint:0.5, 0.2
                 on_release: 
                     app.root.current= "DLWindow"
@@ -132,18 +131,19 @@ WindowManager: #Handless window views
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white   
 
-            Button: 
-                background_color:(1, 1, 1, 0)
+            Button: #Popup
+                background_color:(1, 1, 1, 0) #Transperent
                 size_hint:0.5, 0.2
                 on_release: root.OpenPopup()
+                #on_release: root.UpdateSite()
                 Image:
                     source: 'icons/plus-4x.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white   
                 
-            Button: 
-                background_color:(1, 1, 1, 0)
+            Button: #Right down menu 
+                background_color:(1, 1, 1, 0) #Transperent
                 size_hint:0.5, 0.2
                 on_release: 
                     app.root.current= "DRWindow"
@@ -156,11 +156,11 @@ WindowManager: #Handless window views
                
 
 
-<SecondWindow>:
+<SecondWindow>: #Window under hamburger menu
     name: "second"
     GridLayout:
         cols:1
-        rows:3
+        rows:2
         GridLayout: #Up bar
             cols:1
             rows:1
@@ -172,8 +172,8 @@ WindowManager: #Handless window views
                     pos: self.pos
             size_hint:1, 0.02
 
-            Button: 
-                background_color:(0, 0, 0, 0)#transperent
+            Button: #Button back to main view
+                background_color:(0, 0, 0, 0) #transperent
                 on_release: 
                     app.root.current= "main"
                     root.manager.transition.direction = "right"
@@ -181,13 +181,65 @@ WindowManager: #Handless window views
                     source: 'icons/arrow-circle-left-4x.png'    
                     center_y: self.parent.center_y         
                     color: [1,1,1,1] #white
-        Label:
-            text: "Settings"
-            size_hint:0.6, 0.2
-            pos_hint: None,None
-            color: 0, 0, 0, 1
+        GridLayout: #Menu    
+            cols:1
+            rows:4
+            size_hint: 1, None
+            height: root.height - 55
+            canvas.before:
+                Color:
+                    rgba: .7, .9, .8, .4
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+             
+            Button: 
+                background_color:(1, 1, 1, .1)
+                size_hint_y: None
+                height: 60
+                text: "Profile"
+                text_size: root.width, root.height
+                halign: 'left'
+                valign: 'center'
+                color: 0, .1, .2, 1
+                padding_x: 20
+                font_size: 25
+            Button: 
+                background_color:(1, 1, 1, .1)
+                size_hint_y: None
+                height: 60
+                text: "New"
+                text_size: root.width, root.height
+                halign: 'left'
+                valign: 'center'
+                color: 0, .1, .2, 1
+                padding_x: 20
+                font_size: 25
+            Button: 
+                background_color:(1, 1, 1, .1)
+                size_hint_y: None
+                height: 60
+                text: "Menu"
+                text_size: root.width, root.height
+                halign: 'left'
+                valign: 'center'
+                color: 0, .1, .2, 1
+                padding_x: 20
+                font_size: 25
+            Button: 
+                background_color:(1, 1, 1, .1)
+                size_hint_y: None
+                height: 60
+                text: "Settings"
+                text_size: root.width, root.height
+                halign: 'left'
+                valign: 'center'
+                color: 0, .1, .2, 1
+                padding_x: 20
+                font_size: 25
+        
     
-<DLWindow>
+<DLWindow>: #Down left menu
     name: "DLWindow"
     GridLayout: #Down bar
         cols:1
@@ -200,8 +252,8 @@ WindowManager: #Handless window views
             Rectangle:
                 size: self.size
                 pos: self.pos
-        Button: 
-            background_color:(1, 1, 1, 0)
+        Button: #Back to main view
+            background_color:(1, 1, 1, 0) #Transperent
             size_hint:0.5, 0.2
             on_release: 
                 app.root.current= "main"
@@ -210,10 +262,10 @@ WindowManager: #Handless window views
                 source: 'icons/arrow-circle-bottom-4x.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-                color: [1,1,1,1] #white   
+                color: [1,1,1,1]   
 
 
-<DRWindow>
+<DRWindow>: #Right down menu 
     name: "DRWindow"
     GridLayout: #Down bar
         cols:1
@@ -226,8 +278,8 @@ WindowManager: #Handless window views
             Rectangle:
                 size: self.size
                 pos: self.pos
-        Button: 
-            background_color:(1, 1, 1, 0)
+        Button: #Back to main view
+            background_color:(1, 1, 1, 0)#Transperent
             size_hint:0.5, 0.2
             on_release: 
                 app.root.current= "main"
