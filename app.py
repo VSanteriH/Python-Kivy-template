@@ -31,12 +31,14 @@ import re
 #Classes that can be edited inside main.kv file.
 class P(FloatLayout):
     def ClosePopup(self):
-        popup.show_popup(True)  
-           
+        popup.show_popup(True)      
     pass
 class MainWindow(Screen, Widget):
+    articleammount = 10
     def OpenPopup(self):
         popup.show_popup(False)
+    def SiteLenght(self, siteLe):
+        articleammount = siteLe 
     pass
 class SecondWindow(Screen):
     pass

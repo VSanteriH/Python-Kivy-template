@@ -23,17 +23,18 @@ WindowManager: #Handless window views
 
 <TextContent>: 
     
-<Article>:
-    BoxLayout:#outerlines
-        size:(root.width,2050)
 
+<Article>:
+    size : root.width,140 # Sets one article box size
+    size_hint :1, None
+    BoxLayout:#outerlines
+        orientation: 'vertical'
         canvas.before: 
             Color:
                 rgba: .7, .9, .8, .9
             Line:
                 width: 2
                 rectangle: self.x -1, self.y, self.width + 2, self.height -2
-        orientation: 'vertical'
         Label:#title
             text: root.label_title
             text_size: root.width, root.height/2
@@ -62,7 +63,7 @@ WindowManager: #Handless window views
     GridLayout:
         cols:1
         rows:3
-        GridLayout: #Up bar
+        GridLayout: #Up bar#############################
             cols:3
             rows:1
             canvas.before:
@@ -93,21 +94,22 @@ WindowManager: #Handless window views
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white
                   
-        BoxLayout:#Mid 
+        GridLayout:#Mid ######################################################
+            cols:1
             ScrollView:
-                size_hint: 1.0, 1
-                height:root.height - 200
+                size_hint: 1, None
                 pos_hint: {'center_y':0.5}
                 bar_width: 2
-
+                size : root.width, root.height - root.height/6.5 #minus downbar
+                
                 GridLayout:
                     cols: 1
                     size_hint_y: None
-                    height: root.height + 1000 #Determs Articles size
+                    height: 140 * root.articleammount
                     TextContent:
                  
 
-        GridLayout: #Down bar
+        GridLayout: #Down bar #############################
             cols:3
             rows:1
             size_hint:0.02, 0.08
