@@ -1,16 +1,15 @@
 WindowManager: #Handless window views. Add "Screen" subclass to classes you want to use this.
     MainWindow:
     SecondWindow:
-    DLWindow:
-    DMWindow:
-    DRWindow:
+    DownLWindow:
+    DownRWindow:
 
 #:import Factory kivy.factory.Factory
-<AddNew>:
+
 
 <AddNewPop@Popup>: #Popup window and content
     size_hint: .9, .85
-    title: "New post"
+    title: "New article"
     FloatLayout:
         Label:
             text: "Title"
@@ -35,6 +34,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             size_hint:0.4, 0.1
             pos_hint: {"center_x": 0.5, "top":.12}
             on_release: app.AddToList(Title.text,Text.text), root.dismiss()
+            #on_release: print(content.TextContent)
 
 <TextContent>: #Content is made inside content.py 
     
@@ -47,14 +47,13 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
         canvas: 
             Color:
                 #rgba: root.r, root.b, root.g, .4 #Random color
-                rgba: .94, 1, 1, 1
-                #rgba: .2, .6, .3, .4
+                rgba: .6, .8, .6, .6
             Rectangle:
-                size: self.width, self.height- 3
+                size: self.width, self.height- 4 #increase to make lines thicker
                 pos: self.pos
 
         Label:#title
-            text: root.label_title
+            text: root.title
             text_size: root.width, root.height/5 #Needed for halign and valign
             halign: 'left'
             valign: 'top'
@@ -63,8 +62,9 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             color: 0, .1, .2, 1
             font_size : 20
 
+
         Label:#text
-            text: root.label_text
+            text: root.text
             size: self.width , self.height
             text_size: root.width, root.height / 1.3 #Needed for halign and valign
             halign: 'left'
@@ -111,18 +111,18 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white
                       
-        GridLayout:#Mid ######################################################
+        GridLayout: # Mid ######################################################
             cols:1
             ScrollView:
                 size_hint: 1, None
                 pos_hint: {'center_y':0.5}
                 bar_width: 2
-                size : root.width, root.height - root.height/6.5 #minus downbar
+                size : root.width, root.height - root.height/6.5 # Minus downbar height
                 
                 GridLayout:
                     cols: 1
                     size_hint_y: None
-                    height: root.articleheight * root.articleammount # values from app.py MainWindow class.
+                    height: root.articleheight * root.articleammount # Values from app.py MainWindow class.
                     TextContent:
                  
 
@@ -141,7 +141,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 background_color:(1, 1, 1, 0)#Transperent
                 size_hint:0.5, 0.2
                 on_release: 
-                    app.root.current= "DLWindow"
+                    app.root.current= "DownLWindow"
                     root.manager.transition.direction = "up"
                 Image:
                     source: 'icons/folder-4x.png'
@@ -164,7 +164,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 background_color:(1, 1, 1, 0) #Transperent
                 size_hint:0.5, 0.2
                 on_release: 
-                    app.root.current= "DRWindow"
+                    app.root.current= "DownRWindow"
                     root.manager.transition.direction = "up"
                 Image:
                     source: 'icons/person-4x.png'
@@ -257,8 +257,8 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 font_size: 25
         
     
-<DLWindow>: #Down left menu
-    name: "DLWindow"
+<DownLWindow>: #Down left menu
+    name: "DownLWindow"
     GridLayout: #Down bar
         cols:1
         rows:1
@@ -283,9 +283,10 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 color: [1,1,1,1]   
 
 
-<DRWindow>: #Right down menu 
-    name: "DRWindow"
+<DownRWindow>: #Right down menu 
+    name: "DownRWindow"
     GridLayout: #Down bar
+        
         cols:1
         rows:1
         size_hint:1, 0.08
