@@ -1,40 +1,31 @@
-#Code by Santeri Hartikainen
+# Code by Santeri Hartikainen
 import kivy
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
-Window.clearcolor = (.7, .9, .8, 1)
 
-#Window.clearcolor = (.94, 1, 1, 1)
-#size and position for testing
-Window.size = (360, 640)#Samsung s5 size
-Window.left = 1500
+# Size and position for testing
+Window.size = (360, 640) # Samsung s5 size
+Window.left = 1500 # Right side of screen
 
-#external py code files
-import popup
-import changecolor
-import content
+Window.clearcolor = (.94, 1, 1, 1)
+
+import changecolor # Change color of files in icons folder
+import content # Articless of the app(Mid section)
 
 class MainWindow(Screen):
-    articleammount = 10 
+    articleammount = 10
     articleheight = 140 
-
-class AddNew(Widget):
-    def AddToList(title, text):
-        print(title, text)
-        content.TextContent.updateList(title, text)
-    pass
 
 class SecondWindow(Screen):
     pass
-#Downbar buttons 
-class DLWindow(Screen):
+
+class DownLWindow(Screen):
     pass
-class DMWindow(Screen):
-    pass
-class DRWindow(Screen):
+
+class DownRWindow(Screen):
     pass
 
 class WindowManager(ScreenManager):
@@ -43,17 +34,15 @@ class WindowManager(ScreenManager):
 class MainApp(App):
     def build(self):   
         pass
+
+    # Called from kv files popup button.
     def AddToList(self,title, text):
-        
-        AddNew.AddToList(title, text)
+        # Adds title and text to TextContent class StringObjects
+        content.TextContent.newtitle = title
+        content.TextContent.newtext = text
+        content.TextContent() # Calls TextContent class whoms __init__ that calls updateList()
 
 if __name__ == "__main__":
-    #changecolor.FindFiles()#Use this to change your projects black icons to white in icons folder.
+    # changecolor.find_files()   #Use this to change your projects black icons to white in icons folder.
     app = MainApp()
     app.run()
-    
-    
-    
-
-#Builder.load_file("main.kv")#Needed for popup
-    
