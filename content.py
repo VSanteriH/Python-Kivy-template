@@ -35,7 +35,7 @@ class Article(BoxLayout):
     r = NumericProperty()
     g = NumericProperty()
     b = NumericProperty()
-    sizeY = 140 # Sets height of single article
+    article_height = 140 # Sets height of single article
 
 class TextContent(BoxLayout): 
     articlesList = []
@@ -53,7 +53,7 @@ class TextContent(BoxLayout):
         arti = Article()       
         arti.title = self.newtitle
         arti.text = self.newtext
-        FirstLoad.textcont.height = FirstLoad.textcont.height + Article.sizeY # Updates TextContent height.
+        FirstLoad.textcont.height = FirstLoad.textcont.height + Article.article_height # Updates TextContent height.
         FirstLoad.textcont.add_widget(arti,app.MainWindow.article_ammount) # add articles to TextContent copy and local view
        
     
@@ -72,7 +72,7 @@ class TextContent(BoxLayout):
             arti.r = round(random.uniform(.5, .7), 1)
             arti.b = round(random.uniform(.5, .9), 1)
             arti.g = round(random.uniform(.2, .8), 1)
-            self.height = self.height + Article.sizeY
+            self.height = self.height + Article.article_height
             self.add_widget(arti) # add articles to TextContent  
 
     def __init__(self, **kwargs):
