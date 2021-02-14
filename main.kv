@@ -34,11 +34,10 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             size_hint:0.4, 0.1
             pos_hint: {"center_x": 0.5, "top":.12}
             on_release: app.AddToList(Title.text,Text.text), root.dismiss()
-            #on_release: print(content.TextContent)
 
-<TextContent>: #Content is made inside content.py 
+<TextContent@BoxLayout>: #Content is made inside content.py 
     
-#Single article element with 2 text labels
+# Single article element with 2 text labels
 <Article>: 
     size : root.width, root.sizeY # Sets one article box size
     size_hint :1, None
@@ -46,15 +45,15 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
         orientation: 'vertical'
         canvas: 
             Color:
-                #rgba: root.r, root.b, root.g, .4 #Random color
+                #rgba: root.r, root.b, root.g, .4 # Random color
                 rgba: .6, .8, .6, .6
             Rectangle:
-                size: self.width, self.height- 4 #increase to make lines thicker
+                size: self.width, self.height- 4 # increase to make lines thicker
                 pos: self.pos
 
         Label:#title
             text: root.title
-            text_size: root.width, root.height/5 #Needed for halign and valign
+            text_size: root.width, root.height/5 # Needed for halign and valign
             halign: 'left'
             valign: 'top'
             padding_x: 5
@@ -66,7 +65,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
         Label:#text
             text: root.text
             size: self.width , self.height
-            text_size: root.width, root.height / 1.3 #Needed for halign and valign
+            text_size: root.width, root.height / 1.3 # Needed for halign and valign
             halign: 'left'
             valign: 'top'
             padding_x: 5
@@ -79,7 +78,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
     GridLayout:
         cols:1
         rows:3
-        GridLayout: #Up bar#############################
+        GridLayout: #Up bar
             cols:3
             rows:1
             canvas.before:
@@ -111,19 +110,15 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white
                       
-        GridLayout: # Mid ######################################################
+        GridLayout: # Mid 
             cols:1
             ScrollView:
                 size_hint: 1, None
                 pos_hint: {'center_y':0.5}
                 bar_width: 2
                 size : root.width, root.height - root.height/6.5 # Minus downbar height
-                
-                GridLayout:
-                    cols: 1
-                    size_hint_y: None
-                    height: root.articleheight * root.articleammount # Values from app.py MainWindow class.
-                    TextContent:
+
+                TextContent:
                  
 
         GridLayout: 
@@ -150,7 +145,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     color: [1,1,1,1] #white   
 
             Button: #Popup ###################################################
-                background_color:(1, 1, 1, 0) #Transperent
+                background_color:(1, 1, 1, 0) # Transperent
                 size_hint:0.5, 0.2
                 on_release: Factory.AddNewPop().open()
                 #on_release: root.UpdateSite()
@@ -161,7 +156,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     color: [1,1,1,1] #white   
                 
             Button: #Right down menu 
-                background_color:(1, 1, 1, 0) #Transperent
+                background_color:(1, 1, 1, 0) # Transperent
                 size_hint:0.5, 0.2
                 on_release: 
                     app.root.current= "DownRWindow"
@@ -191,14 +186,14 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             size_hint:1, 0.02
 
             Button: #Button back to main view
-                background_color:(0, 0, 0, 0) #transperent
+                background_color:(0, 0, 0, 0) # Transperent
                 on_release: 
                     app.root.current= "main"
                     root.manager.transition.direction = "right"
                 Image:
                     source: 'icons/arrow-circle-left-4x.png'    
                     center_y: self.parent.center_y         
-                    color: [1,1,1,1] #white
+                    color: [1,1,1,1] # White
         GridLayout: #Menu    
             cols:1
             rows:4
@@ -257,9 +252,9 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 font_size: 25
         
     
-<DownLWindow>: #Down left menu
+<DownLWindow>: # Down left menu
     name: "DownLWindow"
-    GridLayout: #Down bar
+    GridLayout: # Down bar
         cols:1
         rows:1
         size_hint:1, 0.08
@@ -283,9 +278,9 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 color: [1,1,1,1]   
 
 
-<DownRWindow>: #Right down menu 
+<DownRWindow>: # Right down menu 
     name: "DownRWindow"
-    GridLayout: #Down bar
+    GridLayout: # Down bar
         
         cols:1
         rows:1
@@ -298,7 +293,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 size: self.size
                 pos: self.pos
         Button: #Back to main view
-            background_color:(1, 1, 1, 0)#Transperent
+            background_color:(1, 1, 1, 0)# Transperent
             size_hint:0.5, 0.2
             on_release: 
                 app.root.current= "main"
@@ -307,7 +302,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 source: 'icons/arrow-circle-bottom-4x.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-                color: [1,1,1,1] #white   
+                color: [1,1,1,1] # white   
 
 
 
