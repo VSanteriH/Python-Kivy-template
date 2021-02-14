@@ -6,7 +6,6 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
 
 #:import Factory kivy.factory.Factory
 
-
 <AddNewPop@Popup>: #Popup window and content
     size_hint: .9, .85
     title: "New article"
@@ -34,8 +33,9 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             size_hint:0.4, 0.1
             pos_hint: {"center_x": 0.5, "top":.12}
             on_release: app.AddToList(Title.text,Text.text), root.dismiss()
+<ScrollView>:
 
-<TextContent@BoxLayout>: #Content is made inside content.py 
+<ArticlesContainer>: #Content is made inside content.py 
     
 # Single article element with 2 text labels
 <Article>: 
@@ -89,15 +89,16 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     pos: self.pos
             size_hint:1, 0.1
             spacing: 70, 0
-           
+            
             Image: #Hidden
                 source: 'icons/aperture-4x.png'
                 color: [1,1,1,0]
-
-            Image: #Logo ect
-                source: 'icons/aperture-4x.png'
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+            Button: 
+                background_color:(0, 0, 0, 0)#transperent
+                Image: #Logo 
+                    source: 'icons/aperture-4x.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
 
             Button: #Hamburger that takes to right side menu
                 background_color:(0, 0, 0, 0)#transperent
@@ -112,13 +113,13 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                       
         GridLayout: # Mid 
             cols:1
-            ScrollView:
+            ScrollView: 
                 size_hint: 1, None
                 pos_hint: {'center_y':0.5}
                 bar_width: 2
                 size : root.width, root.height - root.height/6.5 # Minus downbar height
-
-                TextContent:
+                on_touch_up: root.scrolls(self) # Send scroll object to MainWindow class
+                ArticlesContainer:
                  
 
         GridLayout: 
