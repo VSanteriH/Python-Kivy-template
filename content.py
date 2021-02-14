@@ -35,7 +35,7 @@ class Article(BoxLayout):
     r = NumericProperty()
     g = NumericProperty()
     b = NumericProperty()
-    sizeY = 140 # Sets height of article
+    sizeY = 140 # Sets height of single article
 
 class TextContent(BoxLayout): 
     articlesList = []
@@ -44,6 +44,7 @@ class TextContent(BoxLayout):
     articlesList = articles 
     newtitle = StringProperty()
     newtext = StringProperty()
+ 
     
     def update_list(self):
         print("Add to List")
@@ -52,17 +53,16 @@ class TextContent(BoxLayout):
         arti = Article()       
         arti.title = self.newtitle
         arti.text = self.newtext
-        
-        #FirstLoad.textcont.remove_widget(10)
-        FirstLoad.textcont.add_widget(arti,app.MainWindow.articleammount) # add articles to TextContent copy and local view
-        app.MainWindow.articleammount = app.MainWindow.articleammount + 1
-        print(app.MainWindow.articleammount)
-        app.MainApp().build()
+        FirstLoad.textcont.height = FirstLoad.textcont.height + Article.sizeY # Updates TextContent height.
+        FirstLoad.textcont.add_widget(arti,app.MainWindow.article_ammount) # add articles to TextContent copy and local view
+       
     
     def do_list(self):
         print("Do list")
         super(TextContent, self).__init__()
         self.orientation = "vertical"
+        self.size_hint_y=None
+        self.height=0
         for file in self.articlesList:
             arti = Article()       
             arti.title = file['title']
@@ -72,6 +72,7 @@ class TextContent(BoxLayout):
             arti.r = round(random.uniform(.5, .7), 1)
             arti.b = round(random.uniform(.5, .9), 1)
             arti.g = round(random.uniform(.2, .8), 1)
+            self.height = self.height + Article.sizeY
             self.add_widget(arti) # add articles to TextContent  
 
     def __init__(self, **kwargs):
