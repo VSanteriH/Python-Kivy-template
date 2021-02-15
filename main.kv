@@ -111,18 +111,18 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white
                       
-        GridLayout: # Mid 
+        GridLayout: # Mid content
             cols:1
             ScrollView: 
                 size_hint: 1, None
                 pos_hint: {'center_y':0.5}
                 bar_width: 2
                 size : root.width, root.height - root.height/6.5 # Minus downbar height
-                on_touch_up: root.scrolls(self) # Send scroll object to MainWindow class
+                on_touch_down: root.scrolls(self) # Send scroll object to MainWindow class
                 ArticlesContainer:
                  
 
-        GridLayout: 
+        GridLayout: # Bottom bar
             cols:3
             rows:1
             size_hint:0.02, 0.08
