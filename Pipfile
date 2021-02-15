@@ -5,7 +5,10 @@ name = "pypi"
 
 [packages]
 kivy = "*"
+sqlalchemy = "*"
+python-dotenv = "*"
 pillow = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
