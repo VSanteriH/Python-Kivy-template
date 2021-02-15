@@ -6,31 +6,57 @@ from kivy.storage.jsonstore import JsonStore
 from kivy.uix.widget import Widget
 from kivy.uix.scrollview import ScrollView
 
+from sqlalchemy import create_engine, text
 import time
-
+import os
 import app
 import random
-
 from kivy.lang import Builder
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class Data():
-    data1 = JsonStore('content.json')
-    data = data1.get('rows')
     articlesList = []
+    data = []
     last_row = 0
+    offset = 0
+
+def get_db_data():
+
+    DATABASE_URL = os.environ['DATABASE_URL'] # Postgres database URL
+    db = create_engine(DATABASE_URL) # Connect to db
+    limit = 100
+    offset = Data.offset
+    sql = text('SELECT * from Articless LIMIT (:limit) OFFSET (:offset)')
+    results = db.execute(sql , {'limit':limit, 'offset':offset})
+    line = 0
+    data = []
+    for row in results:
+        r = [row['title'],row['text']]
+        data.insert(line, r)
+        line +=1
+    return data
 
 def load_articles():
-    data_list = Data.articlesList
-    for file in Data.data[Data.last_row: Data.last_row+10]:
-        title = str(file['title'])
-        text = str(file['text'])
+    all_articles = Data.articlesList
+    Data.data = get_db_data()
+    new_articles = [] 
+    
+    for file in Data.data:
+        title = str(file[0])
+        text = str(file[1])
         
         article = {
             "title": title,
             "text": text,
         } 
-        data_list.append(article)
-    Data.last_row = Data.last_row + 10
-    return data_list
+        app.MainWindow.article_ammount += 1
+        all_articles.append(article)
+        new_articles.append(article)
+    Data.last_row = Data.last_row + len(all_articles)
+    print( Data.last_row)
+    return new_articles
 
 class Article(BoxLayout):
     ids = NumericProperty()
@@ -58,25 +84,26 @@ class ArticlesContainer(BoxLayout):
         arti = Article()       
         arti.title = self.newtitle
         arti.text = self.newtext
-        arti.ids = time.time() # Make time id
         ArticlesContainerCopy.articles_container_copy.height = ArticlesContainerCopy.articles_container_copy.height + Article.article_height # Updates ArticlesContainer height.
-        ArticlesContainerCopy.articles_container_copy.add_widget(arti,app.MainWindow.article_ammount) # add articles to ArticlesContainer copy and local view
-    
+        ArticlesContainerCopy.articles_container_copy.add_widget(arti, app.MainWindow.article_ammount) # Add articles to ArticlesContainer copy and local view
+        app.MainWindow.article_ammount += 1
+
     def load_more(self):
         print("Load more")  
+        Data.offset += 100
         articles = load_articles()
-        for file in Data.articlesList:
+        for file in articles:
             arti = Article()       
             arti.title = file['title']
             arti.text = file['text']
-            #arti.ids = file['id']
+            
             # Random colors for article background
             arti.r = round(random.uniform(.5, .7), 1)
             arti.b = round(random.uniform(.5, .9), 1)
             arti.g = round(random.uniform(.2, .8), 1)
             
             ArticlesContainerCopy.articles_container_copy.height = ArticlesContainerCopy.articles_container_copy.height + Article.article_height # Updates ArticlesContainer height.
-            ArticlesContainerCopy.articles_container_copy.add_widget(arti) # add articles to ArticlesContainer copy and local view 
+            ArticlesContainerCopy.articles_container_copy.add_widget(arti) # Add articles to ArticlesContainer copy and local view 
 
 
     def do_list(self):
