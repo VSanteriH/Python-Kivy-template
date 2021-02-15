@@ -6,7 +6,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import NumericProperty
 from kivy.core.window import Window
-from kivy.uix.camera import Camera
+
 # Size and position for testing
 Window.size = (360, 640) # Samsung s5 size
 Window.left = 1500 # Right side of screen
@@ -17,12 +17,19 @@ import changecolor # Change color of files in icons folder
 import content # Articless of the app(Mid section)
 
 class MainWindow(Screen):
-    article_ammount = 10
-    def scrolls(self , scroll): # Called after scroll is relased
-        if(scroll.scroll_y <= 0.001): # When scroll position is at   
-            content.ArticlesContainer.load_more(self)
-            scroll.scroll_to(content.ArticlesContainerCopy.articles_container_copy.children[10] , padding=0, animate=False)
- 
+    article_ammount = 0
+    distance = 0.2 
+    def scrolls(self , scroll): # Called after scroll is started
+        print(scroll.scroll_y)
+        if(scroll.scroll_y <= MainWindow.distance): # When scroll position is at point we want to load more data   
+            print(scroll.scroll_y)
+            
+            content.ArticlesContainer.load_more(self)  
+            scroll.scroll_y = scroll.scroll_y + MainWindow.distance * 1.5 
+            MainWindow.distance = MainWindow.distance / 1.5 
+
+
+
 class SecondWindow(Screen):
     pass
 
