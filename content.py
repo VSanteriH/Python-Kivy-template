@@ -16,6 +16,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+DATABASE_URL = os.environ['DATABASE_URL'] # Postgres database URL
+db = create_engine(DATABASE_URL) # Connect to db
+
 class Data():
     articlesList = []
     data = []
@@ -24,14 +27,13 @@ class Data():
 
 def get_db_data():
 
-    DATABASE_URL = os.environ['DATABASE_URL'] # Postgres database URL
-    db = create_engine(DATABASE_URL) # Connect to db
-    limit = 100
+    limit = 1000
     offset = Data.offset
     sql = text('SELECT * from Articless LIMIT (:limit) OFFSET (:offset)')
     results = db.execute(sql , {'limit':limit, 'offset':offset})
     line = 0
     data = []
+    Data.offset += 1000
     for row in results:
         r = [row['title'],row['text']]
         data.insert(line, r)
@@ -40,7 +42,7 @@ def get_db_data():
 
 def load_articles():
     all_articles = Data.articlesList
-    Data.data = get_db_data()
+    Data.data = get_db_data() 
     new_articles = [] 
     
     for file in Data.data:
@@ -59,7 +61,6 @@ def load_articles():
     return new_articles
 
 class Article(BoxLayout):
-    ids = NumericProperty()
     title = StringProperty()
     text = StringProperty()
     r = NumericProperty()
@@ -90,7 +91,6 @@ class ArticlesContainer(BoxLayout):
 
     def load_more(self):
         print("Load more")  
-        Data.offset += 100
         articles = load_articles()
         for file in articles:
             arti = Article()       
