@@ -83,7 +83,7 @@ class ArticlesContainer(BoxLayout):
     newtext = StringProperty()
    
     def add_to_list(self):
-        """ Called from app.py   """
+        """ Called from app.py MainApp when user adds article from popup."""
         time_unix = time.time() # Get unix time
         arti = Article()       
         arti.title = self.newtitle
