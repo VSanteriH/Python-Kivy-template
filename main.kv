@@ -34,8 +34,6 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
             pos_hint: {"center_x": 0.5, "top":.12}
             on_release: app.add_to_list(Title.text,Text.text), root.dismiss()
 
-<ScrollView>:
-
 <ArticlesContainer>: # Content is made inside content.py 
     
 # Single article element with 2 text labels
@@ -79,7 +77,7 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
     GridLayout:
         cols:1
         rows:3
-        GridLayout: #Up bar
+        GridLayout: # Up bar
             cols:3
             rows:1
             canvas.before:
@@ -95,13 +93,13 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
                 source: 'icons/aperture-4x.png'
                 color: [1,1,1,0]
             Button: 
-                background_color:(0, 0, 0, 0) #Transperent
+                background_color:(0, 0, 0, 0) # Transperent
                 Image: #Logo 
                     source: 'icons/aperture-4x.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
 
-            Button: #Hamburger that takes to right side menu
+            Button: # Hamburger that takes to right side menu
                 background_color:(0, 0, 0, 0) # Transperent
                 on_release: 
                     app.root.current= "second"
@@ -120,6 +118,7 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
                 bar_width: 2
                 size : root.width, root.height - root.height/6.5 # Minus downbar height
                 on_touch_down: root.scrolls(self) # Send scroll object to MainWindow class
+                
                 ArticlesContainer:
                  
 
@@ -201,16 +200,16 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
             cols:1
             rows:4
             size_hint: 1, None
-            height: root.height - 55
+            height: root.height - 55 # Up bar height
             canvas.before:
                 Color:
-                    rgba: .7, .9, .8, .4
+                    rgba: .7, .9, .8, .4 # Up bar color
                 Rectangle:
                     size: self.size
                     pos: self.pos
              
-            Button: 
-                background_color:(1, 1, 1, .1)
+            Button: # 1
+                background_color:(1, 1, 1, .1) 
                 size_hint_y: None
                 height: root.height / 8
                 text: "Profile"
@@ -220,10 +219,10 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
                 color: 0, .1, .2, 1
                 padding_x: 20
                 font_size: 25
-            Button: 
+            Button: # 2
                 background_color:(1, 1, 1, .1)
                 size_hint_y: None
-                height: root.height /8
+                height: root.height / 8
                 text: "News"
                 text_size: root.width, root.height
                 halign: 'left'
@@ -231,10 +230,10 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
                 color: 0, .1, .2, 1
                 padding_x: 20
                 font_size: 25
-            Button: 
+            Button: # 3
                 background_color:(1, 1, 1, .1)
                 size_hint_y: None
-                height: root.height/8
+                height: root.height / 8
                 text: "Settings"
                 text_size: root.width, root.height
                 halign: 'left'
@@ -242,7 +241,7 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
                 color: 0, .1, .2, 1
                 padding_x: 20
                 font_size: 25
-            Button: 
+            Button: # 4
                 background_color:(1, .2, .2, .14)
                 size_hint_y: None
                 height: root.height / 8
@@ -264,7 +263,7 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
 
         canvas.before:
             Color:
-                rgba: 0, 0, 0, 1 
+                rgba: 0, 0, 0, 1 # Down bar color
             Rectangle:
                 size: self.size
                 pos: self.pos
@@ -291,7 +290,7 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
         spacing: 50, 0
         canvas.before:
             Color:
-                rgba: 0, 0, 0, 1 
+                rgba: 0, 0, 0, 1 # Down bar color
             Rectangle:
                 size: self.size
                 pos: self.pos
@@ -299,7 +298,7 @@ WindowManager: # Handless window views. Add "Screen" subclass to classes you wan
             background_color:(1, 1, 1, 0) # Transperent
             size_hint:0.5, 0.2
             on_release: 
-                app.root.current= "main"
+                app.root.current= "main" 
                 root.manager.transition.direction = "down"
             Image:
                 source: 'icons/arrow-circle-bottom-4x.png'

@@ -16,7 +16,8 @@ class MainWindow(Screen):
     article_ammount = 0
     distance = 0 
     def scrolls(self , scroll):
-        """ Called every time scoll starts. Checks if we have reached bottom of the screen.
+        """ 
+        Called every time scoll starts. Checks if we have reached bottom of the screen.
         If so, calls ArticlesContainer.load_more in content.py that loads 1000 rows more.
         After the load is done, scrolls to the previous scroll_y. 
         """
@@ -34,6 +35,7 @@ class DownRWindow(Screen):
     pass
 
 class WindowManager(ScreenManager):
+    """ handless window view and changes."""
     pass
 
 class MainApp(App):
@@ -41,7 +43,8 @@ class MainApp(App):
         pass
 
     def add_to_list(self,title, text):
-        """ Called from kv file popup MainApp section. Gets title and text and add those to ArticleContainer class.
+        """ 
+        Called from kv file popup MainApp section. Gets title and text and add those to ArticleContainer class.
         After that calls ArticleContainer class, that handless the rest in __init__ section.
         """
         content.ArticlesContainer.newtitle = title

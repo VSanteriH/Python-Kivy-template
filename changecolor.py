@@ -1,10 +1,7 @@
 '''
-Change color
-==============
-
 This file is used for changing icons color from black to white, so icon color could be 
 changed in code.
-
+Icon images are from https://github.com/iconic/open-iconic/tree/master/png
 '''
 
 import os

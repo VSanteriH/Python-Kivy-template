@@ -25,9 +25,10 @@ class Data():
     offset = 0
 
 def get_db_data():
-    """ Loads 1000 rows from db and returns object with that data. 
+    """ 
+    Global funtion that loads 1000 rows from db and returns object with that data. 
     Offset is at the start 1000. After data is loaded add limit ammount to offset,
-    so app will load new data instead of old.
+    so app will load new data instead of old when called.
     """ 
     limit = 1000
     offset = Data.offset
@@ -43,7 +44,7 @@ def get_db_data():
     return data
 
 def load_articles():
-    """ Global funtion that is used to load articless. """
+    """ Global funtion that is used to make articless. """
     Data.data = get_db_data() 
     new_articles = [] 
     
@@ -60,6 +61,7 @@ def load_articles():
     return new_articles
 
 class Article(BoxLayout):
+    """ Handless article generation. """
     title = StringProperty()
     text = StringProperty()
     r = NumericProperty()
@@ -68,14 +70,12 @@ class Article(BoxLayout):
     article_height = 140 # Sets height of single article
 
 class ArticlesContainerCopy():
+    """ Copy of ArticlesContainer that is used to store ArticlesContainer data after app starts. """
     first_load = True  
     articles_container_copy = ObjectProperty # ArticlesContainer is saved to this object
 
 class ArticlesContainer(BoxLayout): 
-    """ Called at the start and every time user scrolls at the bottom.
-    
-    """
-    
+    """ Called at the start and every time user scrolls at the bottom."""
     startpos = len(Data.articles_list)
     articles = load_articles() # Gets aricles from 0 to 10 and add those to oldList and returns that
     Data.articles_list = articles 
@@ -83,7 +83,7 @@ class ArticlesContainer(BoxLayout):
     newtext = StringProperty()
    
     def add_to_list(self):
-        """ Called from app.py MainApp when user adds article from popup."""
+        """ Called from app.py MainApp when user adds article with data from popup."""
         time_unix = time.time() # Get unix time
         arti = Article()       
         arti.title = self.newtitle
@@ -95,7 +95,8 @@ class ArticlesContainer(BoxLayout):
         result = db.execute(sql, {'title':arti.title, 'text': arti.text, 'time':time_unix})
 
     def load_more(self):
-        """ Called from app.py MainWindow when user have scrolled to the bottom.
+        """ 
+        Called from app.py MainWindow when user have scrolled to the bottom.
         Gets 1000 new articles by using load_articles and add those to articles_container_copy.
         """ 
         articles = load_articles()
@@ -114,7 +115,8 @@ class ArticlesContainer(BoxLayout):
 
 
     def do_list(self):
-        """ Adds widgets to ArticlesContainer that contain article title and text. 
+        """ 
+        Adds widgets to ArticlesContainer that contain article title and text. 
         Also adds every added article height to the ArticlesContainer, so app scaless right way.
         """
         super(ArticlesContainer, self).__init__()
