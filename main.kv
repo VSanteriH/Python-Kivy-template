@@ -32,7 +32,8 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             text: "Add"
             size_hint:0.4, 0.1
             pos_hint: {"center_x": 0.5, "top":.12}
-            on_release: app.AddToList(Title.text,Text.text), root.dismiss()
+            on_release: app.add_to_list(Title.text,Text.text), root.dismiss()
+
 <ScrollView>:
 
 <ArticlesContainer>: #Content is made inside content.py 
