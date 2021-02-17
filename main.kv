@@ -1,4 +1,4 @@
-WindowManager: #Handless window views. Add "Screen" subclass to classes you want to use this.
+WindowManager: # Handless window views. Add "Screen" subclass to classes you want to use this.
     MainWindow:
     SecondWindow:
     DownLWindow:
@@ -36,13 +36,13 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
 
 <ScrollView>:
 
-<ArticlesContainer>: #Content is made inside content.py 
+<ArticlesContainer>: # Content is made inside content.py 
     
 # Single article element with 2 text labels
 <Article>: 
     size : root.width, root.article_height # Sets one article box size
     size_hint :1, None
-    BoxLayout:  #Article background
+    BoxLayout: # Article background
         orientation: 'vertical'
         canvas: 
             Color:
@@ -52,7 +52,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 size: self.width, self.height- 4 # increase to make lines thicker
                 pos: self.pos
 
-        Label:#title
+        Label: # Title
             text: root.title
             text_size: root.width, root.height/5 # Needed for halign and valign
             halign: 'left'
@@ -63,7 +63,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             font_size : 20
 
 
-        Label:#text
+        Label: # Text
             text: root.text
             size: self.width , self.height
             text_size: root.width, root.height / 1.3 # Needed for halign and valign
@@ -73,7 +73,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             padding_y: 10   
             color: 0, .1, .2, 1
         
-<MainWindow>: #Main content
+<MainWindow>: # Main content
     name: "main"
 
     GridLayout:
@@ -91,18 +91,18 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
             size_hint:1, 0.1
             spacing: 70, 0
             
-            Image: #Hidden
+            Image: # Hidden
                 source: 'icons/aperture-4x.png'
                 color: [1,1,1,0]
             Button: 
-                background_color:(0, 0, 0, 0)#transperent
+                background_color:(0, 0, 0, 0) #Transperent
                 Image: #Logo 
                     source: 'icons/aperture-4x.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
 
             Button: #Hamburger that takes to right side menu
-                background_color:(0, 0, 0, 0)#transperent
+                background_color:(0, 0, 0, 0) # Transperent
                 on_release: 
                     app.root.current= "second"
                     root.manager.transition.direction = "left"
@@ -135,7 +135,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     size: self.size
                     pos: self.pos
             Button: #Left down menu 
-                background_color:(1, 1, 1, 0)#Transperent
+                background_color:(1, 1, 1, 0) # Transperent
                 size_hint:0.5, 0.2
                 on_release: 
                     app.root.current= "DownLWindow"
@@ -146,7 +146,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white   
 
-            Button: #Popup ###################################################
+            Button: # Popup
                 background_color:(1, 1, 1, 0) # Transperent
                 size_hint:0.5, 0.2
                 on_release: Factory.AddNewPop().open()
@@ -157,7 +157,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     center_y: self.parent.center_y
                     color: [1,1,1,1] #white   
                 
-            Button: #Right down menu 
+            Button: # Right down menu 
                 background_color:(1, 1, 1, 0) # Transperent
                 size_hint:0.5, 0.2
                 on_release: 
@@ -171,12 +171,12 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                
 
 
-<SecondWindow>: #Window under hamburger menu
+<SecondWindow>: # Window under hamburger menu
     name: "second"
     GridLayout:
         cols:1
         rows:2
-        GridLayout: #Up bar
+        GridLayout: # Up bar
             cols:1
             rows:1
             canvas.before:
@@ -187,7 +187,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     pos: self.pos
             size_hint:1, 0.02
 
-            Button: #Button back to main view
+            Button: # Button back to main view
                 background_color:(0, 0, 0, 0) # Transperent
                 on_release: 
                     app.root.current= "main"
@@ -196,7 +196,8 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                     source: 'icons/arrow-circle-left-4x.png'    
                     center_y: self.parent.center_y         
                     color: [1,1,1,1] # White
-        GridLayout: #Menu    
+
+        GridLayout: # Menu    
             cols:1
             rows:4
             size_hint: 1, None
@@ -268,7 +269,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 size: self.size
                 pos: self.pos
         Button: #Back to main view
-            background_color:(1, 1, 1, 0) #Transperent
+            background_color:(1, 1, 1, 0) # Transperent
             size_hint:0.5, 0.2
             on_release: 
                 app.root.current= "main"
@@ -295,7 +296,7 @@ WindowManager: #Handless window views. Add "Screen" subclass to classes you want
                 size: self.size
                 pos: self.pos
         Button: #Back to main view
-            background_color:(1, 1, 1, 0)# Transperent
+            background_color:(1, 1, 1, 0) # Transperent
             size_hint:0.5, 0.2
             on_release: 
                 app.root.current= "main"
