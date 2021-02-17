@@ -20,20 +20,22 @@ DATABASE_URL = os.environ['DATABASE_URL'] # Postgres database URL
 db = create_engine(DATABASE_URL) # Connect to db
 
 class Data():
-    articlesList = []
+    articles_list = []
     data = []
-    last_row = 0
     offset = 0
 
 def get_db_data():
-
+    """ Loads 1000 rows from db and returns object with that data. 
+    Offset is at the start 1000. After data is loaded add limit ammount to offset,
+    so app will load new data instead of old.
+    """ 
     limit = 1000
     offset = Data.offset
-    sql = text('SELECT * from Articless LIMIT (:limit) OFFSET (:offset)')
+    sql = text('SELECT * from Articless ORDER BY time DESC LIMIT (:limit) OFFSET (:offset)') # Ordered by adding time. Oldest are at the bottom.
     results = db.execute(sql , {'limit':limit, 'offset':offset})
     line = 0
     data = []
-    Data.offset += 1000
+    Data.offset += limit
     for row in results:
         r = [row['title'],row['text']]
         data.insert(line, r)
@@ -41,7 +43,7 @@ def get_db_data():
     return data
 
 def load_articles():
-    all_articles = Data.articlesList
+    """ Global funtion that is used to load articless. """
     Data.data = get_db_data() 
     new_articles = [] 
     
@@ -54,10 +56,7 @@ def load_articles():
             "text": text,
         } 
         app.MainWindow.article_ammount += 1
-        all_articles.append(article)
         new_articles.append(article)
-    Data.last_row = Data.last_row + len(all_articles)
-    print( Data.last_row)
     return new_articles
 
 class Article(BoxLayout):
@@ -73,24 +72,32 @@ class ArticlesContainerCopy():
     articles_container_copy = ObjectProperty # ArticlesContainer is saved to this object
 
 class ArticlesContainer(BoxLayout): 
+    """ Called at the start and every time user scrolls at the bottom.
     
-    startpos = len(Data.articlesList)
+    """
+    
+    startpos = len(Data.articles_list)
     articles = load_articles() # Gets aricles from 0 to 10 and add those to oldList and returns that
-    Data.articlesList = articles 
+    Data.articles_list = articles 
     newtitle = StringProperty()
     newtext = StringProperty()
    
     def add_to_list(self):
-        print("Add to List")  
+        """ Called from app.py   """
+        time_unix = time.time() # Get unix time
         arti = Article()       
         arti.title = self.newtitle
         arti.text = self.newtext
         ArticlesContainerCopy.articles_container_copy.height = ArticlesContainerCopy.articles_container_copy.height + Article.article_height # Updates ArticlesContainer height.
         ArticlesContainerCopy.articles_container_copy.add_widget(arti, app.MainWindow.article_ammount) # Add articles to ArticlesContainer copy and local view
         app.MainWindow.article_ammount += 1
+        sql = text('INSERT INTO Articless(title, text, time)  VALUES ( :title, :text, :time)')
+        result = db.execute(sql, {'title':arti.title, 'text': arti.text, 'time':time_unix})
 
     def load_more(self):
-        print("Load more")  
+        """ Called from app.py MainWindow when user have scrolled to the bottom.
+        Gets 1000 new articles by using load_articles and add those to articles_container_copy.
+        """ 
         articles = load_articles()
         for file in articles:
             arti = Article()       
@@ -107,12 +114,14 @@ class ArticlesContainer(BoxLayout):
 
 
     def do_list(self):
-        print("Do list")
+        """ Adds widgets to ArticlesContainer that contain article title and text. 
+        Also adds every added article height to the ArticlesContainer, so app scaless right way.
+        """
         super(ArticlesContainer, self).__init__()
         self.orientation = "vertical"
         self.size_hint_y=None
         self.height=0
-        for file in Data.articlesList:
+        for file in Data.articles_list:
             arti = Article()       
             arti.title = file['title']
             arti.text = file['text']
@@ -125,6 +134,7 @@ class ArticlesContainer(BoxLayout):
             self.add_widget(arti) # add articles to ArticlesContainer  
 
     def __init__(self, **kwargs):
+        """ Called at the start of app and when data is added from popup. """
         if ArticlesContainerCopy.first_load == True:
             self.do_list()
             ArticlesContainerCopy.first_load = False 
