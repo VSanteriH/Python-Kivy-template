@@ -1,18 +1,10 @@
-# Code by Santeri Hartikainen
 import kivy
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivy.lang import Builder
-from kivy.uix.modalview import ModalView
-from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.popup import Popup
-from kivy.properties import NumericProperty
 from kivy.core.window import Window
-import time
+
 # Size and position for testing
-Window.size = (360, 640) # Samsung s5 size
+Window.size = (360, 640) # Size of Samsung s5
 Window.left = 1500 # Right side of screen
 
 Window.clearcolor = (.94, 1, 1, 1)
@@ -48,9 +40,9 @@ class MainApp(App):
     def build(self):   
         pass
 
-    def AddToList(self,title, text):
+    def add_to_list(self,title, text):
         """ Called from kv file popup MainApp section. Gets title and text and add those to ArticleContainer class.
-        After that calls ArticleContainer class.
+        After that calls ArticleContainer class, that handless the rest in __init__ section.
         """
         content.ArticlesContainer.newtitle = title
         content.ArticlesContainer.newtext = text
