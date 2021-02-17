@@ -10,7 +10,9 @@ This application uses following libraries
 - pillow for image (icon) manupalation.
 - psycopg2 for using PostgreSQL. 
 
-Have been tested only on Python 3 and with computer. Still needs to be tested with phone.
+Icons that are in use are Iconic icons and are from https://github.com/iconic/open-iconic. Icons are under MIT license: https://github.com/iconic/open-iconic#icons
+
+Have been tested only on Python 3 and with computer. Still needs to be tested with phones.
 
 ![alt text] (https://i.imgur.com/Qf3k7SY.png)
 
