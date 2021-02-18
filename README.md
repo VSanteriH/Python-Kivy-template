@@ -7,7 +7,7 @@ This application uses following libraries
 - kivy
 - sqlalchemy for SQL stuff.
 - python-dotenv for reading .env file.
-- pillow for image (icon) manupalation.
+- pillow for image (icon) manipulation.
 - psycopg2 for using PostgreSQL. 
 
 Icons that are in use are Iconic icons and are from https://github.com/iconic/open-iconic. Icons are under MIT license: https://github.com/iconic/open-iconic#icons
