@@ -18,7 +18,7 @@ Have been tested only on Python 3 and with computer. Still needs to be tested wi
 
 # Config file
 
-Make sure to create .env file in your project root (see .env_example) which contains correct DATABASE URI connection string. This will allow you to run application locally and connect to correct database.
+Make sure to create .env file in your project root (see .env_example) which contains correct DATABASE_URL connection string. This will allow you to run application locally and connect to correct database.
 
 # Runnig application
 
