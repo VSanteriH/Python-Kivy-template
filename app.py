@@ -11,6 +11,7 @@ Window.clearcolor = (.94, 1, 1, 1)
 
 import changecolor # Change color of files in icons folder
 import content # Articless of the app
+import operations # SQL operations
 
 class MainWindow(Screen):
     article_ammount = 0
@@ -22,8 +23,8 @@ class MainWindow(Screen):
         After the load is done, scrolls to the previous scroll_y. 
         """
         if(scroll.scroll_y <= MainWindow.distance):
-            content.ArticlesContainer.load_more(self)  
-            scroll.scroll_to(content.ArticlesContainerCopy.articles_container_copy.children[1000] , padding=0, animate=True)
+            operations.load_more()  
+            scroll.scroll_to(content.ArticlesContainerCopy.articles_container_copy.children[content.Data.limit] , padding=0, animate=True)
 
 class SecondWindow(Screen):
     pass
